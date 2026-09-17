@@ -4,7 +4,6 @@ import com.tiagoxavier.user_service.dto.UserResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 import com.tiagoxavier.user_service.dto.UserRequest;
-import com.tiagoxavier.user_service.dto.UserResponse;
 import com.tiagoxavier.user_service.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

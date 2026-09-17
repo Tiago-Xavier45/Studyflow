@@ -7,6 +7,7 @@ import com.tiagoxavier.user_service.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.tiagoxavier.user_service.exception.ResourceNotFoundException;
+import com.tiagoxavier.user_service.exception.EmailAlreadyExistsException;
 
 import java.time.LocalDateTime;
 
@@ -28,9 +29,14 @@ public class UserService {
         user.setPassword(request.getPassword());
         user.setCreatedAt(LocalDateTime.now());
 
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new EmailAlreadyExistsException("Email já está cadastrado");
+        }
+
         User savedUser = userRepository.save(user);
 
         return new UserResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail(), savedUser.getCreatedAt());
+
     }
 
     public List<UserResponse> getAllUsers() {
