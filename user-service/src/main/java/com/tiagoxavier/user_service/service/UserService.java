@@ -62,6 +62,10 @@ public class UserService {
 
     public UserResponse updateUser(Long id, UserRequest request) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException ("Usuário não encontrado"));
+
+        if(!user.getEmail().equals(request.getEmail()) && userRepository.existsByEmail(request.getEmail())){
+            throw new EmailAlreadyExistsException("Email já cadastrado");
+        }
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
