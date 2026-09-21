@@ -48,12 +48,7 @@ class UserControllerTest {
                 }
                 """;
 
-        mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status()
-                        .isCreated())
-                .andExpect(jsonPath("$.name")
-                        .value("Tiago"))
-                .andExpect(jsonPath("$.email")
-                .value("tiago@email.com"));
+        mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isCreated()).andExpect(jsonPath("$.name").value("Tiago")).andExpect(jsonPath("$.email").value("tiago@email.com"));
     }
 
     @Test
